@@ -1,0 +1,48 @@
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#  http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+
+
+# The configuration file needs to define the sources, 
+# the channels and the sinks.
+# Sources, channels and sinks are defined per agent, 
+# in this case called 'agent'
+
+# At flume's directory and use the following command to start up :
+# bin/flume-ng agent --conf conf --conf-file conf/flume-conf.properties --name agent -Dflume.root.logger=INFO,console
+# sparkSink.hostname can't be localhost, or the spark-streaming program can not connect
+# need to upload commons-lang3-3.5.jar、spark-streaming-flume-sink_2.11-2.2.3.jar into /lib directory
+
+agent.sources = netcatSrc
+agent.channels = memoryChannel
+agent.sinks = sparkSink
+
+# For each one of the sources, the type is defined
+agent.sources.netcatSrc.type = netcat
+agent.sources.netcatSrc.bind = localhost
+agent.sources.netcatSrc.port = 44445
+agent.sources.netcatSrc.channels = memoryChannel
+
+# Each sink's type must be defined
+agent.sinks.sparkSink.type = org.apache.spark.streaming.flume.sink.SparkSink
+agent.sinks.sparkSink.hostname = 192.168.184.130
+agent.sinks.sparkSink.port = 44446
+agent.sinks.sparkSink.channel = memoryChannel
+
+# Each channel's type is defined.
+agent.channels.memoryChannel.type = memory
+agent.channels.memoryChannel.capacity = 100
+

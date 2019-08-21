@@ -1,0 +1,47 @@
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#  http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+
+
+# The configuration file needs to define the sources, 
+# the channels and the sinks.
+# Sources, channels and sinks are defined per agent, 
+# in this case called 'agent'
+
+# At flume's directory and use the following command to start up :
+# bin/flume-ng agent --conf conf --conf-file conf/flume-conf.properties --name agent -Dflume.root.logger=INFO,console
+# start the spark-streaming program before start the flume-ng
+
+agent.sources = netcatSrc
+agent.channels = memoryChannel
+agent.sinks = avroSink
+
+# For each one of the sources, the type is defined
+agent.sources.netcatSrc.type = netcat
+agent.sources.netcatSrc.bind = localhost
+agent.sources.netcatSrc.port = 44445
+agent.sources.netcatSrc.channels = memoryChannel
+
+# Each sink's type must be defined
+agent.sinks.avroSink.type = avro
+agent.sinks.avroSink.hostname = 192.168.1.7
+agent.sinks.avroSink.port = 44446
+agent.sinks.avroSink.channel = memoryChannel
+
+# Each channel's type is defined.
+agent.channels.memoryChannel.type = memory
+agent.channels.memoryChannel.capacity = 100
+
