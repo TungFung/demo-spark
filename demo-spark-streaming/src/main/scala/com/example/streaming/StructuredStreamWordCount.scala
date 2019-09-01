@@ -1,5 +1,7 @@
 package com.example.streaming
 
+import org.apache.spark.sql.{Dataset, Row, SparkSession}
+
 object StructuredStreamWordCount {
 
   def main(args: Array[String]): Unit = {
@@ -14,6 +16,7 @@ object StructuredStreamWordCount {
       .option("port", 9998)
       .load()
 
+    import spark.implicits._
     val words: Dataset[String] = lines.as[String].flatMap(_.split(" "))
 
     val wordCounts: Dataset[Row] = words.groupBy("value").count()

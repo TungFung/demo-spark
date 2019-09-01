@@ -55,6 +55,10 @@ object CreateTempViewApi {
     sqlDf.printSchema()
     sqlDf.show()
 
+    val sqlDf2: DataFrame = spark.newSession().sql("SELECT * FROM global_temp.test_view")
+    sqlDf2.printSchema()
+    sqlDf2.show()
+
     spark.catalog.listDatabases.show()
     /*
       +-------+----------------+--------------------+

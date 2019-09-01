@@ -9,9 +9,9 @@
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>spark-core</module>
-        <module>spark-sql</module>
-        <module>spark-streaming</module>
+        <module>demo-spark-rdd</module>
+        <module>demo-spark-sql</module>
+        <module>demo-spark-streaming</module>
     </modules>
 
     <properties>

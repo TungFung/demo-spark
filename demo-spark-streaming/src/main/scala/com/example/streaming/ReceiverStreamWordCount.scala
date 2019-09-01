@@ -1,5 +1,6 @@
 package com.example.streaming
 
+import com.example.streaming.receiver.CustomerReceiver
 import org.apache.spark.streaming.dstream.{DStream, ReceiverInputDStream}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.apache.spark.{SparkConf, SparkContext}
