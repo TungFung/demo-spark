@@ -5,6 +5,10 @@ import org.apache.spark.streaming.dstream.{DStream, ReceiverInputDStream}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.apache.spark.{SparkConf, SparkContext}
 
+/**
+ * 在master服务器上打开
+ * nc -lk 9998 (yum install -y nc)
+ */
 object SocketStreamWordCount {
 
   def main(args: Array[String]): Unit = {

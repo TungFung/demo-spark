@@ -6,10 +6,10 @@ import org.apache.spark.{SparkConf, SparkContext}
 object WordCount {
 
   def main(args: Array[String]): Unit = {
-    val conf: SparkConf = new SparkConf().setMaster("local[4]").setAppName("Demo")
+    val conf: SparkConf = new SparkConf().setMaster("spark://master:7077").setAppName("Word Count Demo")
     val sc: SparkContext = new SparkContext(conf)
 
-    val inputRDD: RDD[String] = sc.textFile("spark-core/src/main/resources/input/wordcount/")
+    val inputRDD: RDD[String] = sc.textFile("hdfs://master:9999/user/hadoop/wordCount.txt")
 
     val resultRDD: RDD[(String, Int)] = inputRDD
       .flatMap(_.split(" "))
