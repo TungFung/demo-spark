@@ -12,6 +12,7 @@
         <module>demo-spark-rdd</module>
         <module>demo-spark-sql</module>
         <module>demo-spark-streaming</module>
+        <module>demo-spark-ml</module>
     </modules>
 
     <properties>
